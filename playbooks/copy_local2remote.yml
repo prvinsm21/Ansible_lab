@@ -1,0 +1,12 @@
+- name: Ansible Copy Example Local to Remote
+  hosts: all
+  tasks:
+    - copy:
+        src: /home/macko/pfetch-master.zip
+        dest: $HOME/pfetch-master.zip
+  tasks:
+    - name: Extracting the pfetch.zip file
+      unarchive:
+        src: /home/macko/pfetch-master.zip
+        dest: /home/macko/
+        remote_src: true

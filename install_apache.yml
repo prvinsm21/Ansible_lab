@@ -1,0 +1,17 @@
+---
+
+- hosts: prod
+  become: true
+  tasks:
+
+  - name: Installation of Apache2 package on Prod servers
+    yum:
+      name: httpd
+
+- hosts: dev
+  become: true
+  tasks:
+
+  - name: Installation of Apache2 package on Dev servers
+    apt: 
+      name: apache2

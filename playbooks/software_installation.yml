@@ -1,0 +1,32 @@
+---
+- hosts: prod
+  become: true
+  tasks:
+
+  - name: Installation of Softwares on Prod servers
+    yum:
+      name:
+        - mlocate
+        - unzip
+        - tmux
+        - tree
+        - htop
+        - net-tools
+        - qemu-guest-agent
+        - rpm
+
+- hosts: dev
+  become: true
+  tasks:
+
+  - name: Installation of Softwares package on Dev servers
+    apt: 
+      name:
+        - mlocate
+        - unzip
+        - tmux
+        - tree
+        - htop
+        - net-tools
+        - qemu-guest-agent
+        - rpm

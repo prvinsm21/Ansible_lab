@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: true
+  remote_user: macko
+
+  tasks:
+    - name: Copying the pfetch.zip file to server
+      copy:
+        src: /root/pfetch-master.zip
+        dest: /home/macko/
+      
+  tasks:
+    - name: Extracting the pfetch.zip file
+      unarchive:
+        src: /home/macko/pfetch-master.zip
+        dest: /home/macko/
+        remote_src: true

@@ -1,0 +1,11 @@
+- name: Ansible Copy Example Local to Remote
+  hosts: all
+  become: true
+  tasks:
+    - copy:
+        src: $HOME/pfetch-master/pfetch
+        dest: /etc/profile.d/pfetch
+        owner: root
+        group: root
+        mode: 0755
+        remote_src: true

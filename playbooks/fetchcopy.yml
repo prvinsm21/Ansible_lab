@@ -1,0 +1,9 @@
+---
+ - hosts: all
+   tasks:
+    - name: Fetch file from Master
+      run_once: yes
+      fetch: src=~/pfetch-master.zip dest=buffer/ flat=yes
+
+    - name: Copy the zip file from Master to remote servers
+      copy: src=buffer/pfetch-master.zip dest=~/
