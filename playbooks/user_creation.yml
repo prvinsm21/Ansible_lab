@@ -1,0 +1,22 @@
+---
+- name: User creation 
+  hosts: uat1
+  become: true
+  tasks:
+    - name: Creating Dev groups
+      group:
+        name: developers
+        state: present
+
+    - name: Creating Dev group Users
+      user:
+        name: "{{ item }}"
+        password: "{{ 'GyQkFRVNr3' | password_hash ('sha512') }}"
+        home: "/var/www/{{ item }}"
+        group: developers
+        state: present
+      loop:
+        - tom
+        - jim
+        - mark
+        - ray

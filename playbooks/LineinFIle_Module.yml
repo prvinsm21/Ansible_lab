@@ -1,0 +1,28 @@
+---
+- name: Playbook to install the httpd web server on dev server
+  hosts: uat1
+  become: true
+  tasks:
+    - name: Install httpd
+      package:
+        name: apache2
+        state: present
+    
+    - name: Start the httpd service, if not started
+      service:
+        name: apache2
+        state: started
+
+    - name: Add content to index.html file. Create file it not exists
+      copy:
+        dest: /var/www/html/index.html
+        content: This is ansible sample file.
+        mode: "0755"
+        owner: macko
+        group: macko
+    
+    - name: Update content on the above file
+      lineinfile:
+        path: /var/www/html/index.html
+        insertbefore: BOF
+        line: Welcome to Ansible practise sessions !!!
