@@ -1,0 +1,37 @@
+---
+- name: User Creation request
+  hosts: uat1
+  become: true
+
+  tasks:
+    - name: Creating group for developer members
+      group:
+        name: developers
+        state: present
+
+    - name: Creating Test group
+      group:
+        name: testers
+        state: present
+    
+    - name: Creating Users under developer group
+      user:
+        name: " {item} "
+        password: "{{ 'testing123' | password_hash ('sha512') }}"
+        group: developers
+        state: present
+      loop:
+        - Tony
+        - Roger
+        - Thor
+
+    - name: Creating Test group Users
+      user:
+       name: " {item} "
+       password: "{{ 'password2' | password_hash ('sha512') }}"
+       group: testers
+       state: present
+      loop:
+        - Natasha
+        - Pepper
+        - Wanda
