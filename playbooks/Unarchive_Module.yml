@@ -1,0 +1,13 @@
+---
+- name: Extract archived files
+  hosts: dev1
+  become: true
+  
+  tasks:
+    - name: Extract the file and Setup the permission on it
+      unarchive:
+        src: /tmp/compute-4.12-20200624.160449-4-4.12-SNAPSHOT.zip
+        dest: ~/compute/
+        owner: macko
+        group: macko
+        mode: "0655"
