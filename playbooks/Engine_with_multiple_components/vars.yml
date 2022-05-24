@@ -1,4 +1,9 @@
 ---
-download_dir: /tmp/New
-analytics_dir: /app/analytics
-analytics_version: 4.12
+download_dir: /tmp/
+software_dir:
+  - analytics-4.12-SNAPSHOT.zip
+  - archive-4.12-SNAPSHOT.zip
+  - compute-4.12-SNAPSHOT.zip
+  - correlation-4.12-SNAPSHOT.zip
+  - message-4.12-SNAPSHOT.zip
+  - wtowf-4.12-SNAPSHOT.zip

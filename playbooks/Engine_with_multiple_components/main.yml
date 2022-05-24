@@ -24,41 +24,27 @@
         name: openjdk-8-jdk
         state: present
     
-    - name: Copy the analytics.zip file
+    - name: Copy all the zip file
       copy:
         src: /tmp/{{ item }}
         dest: /home/macko/app
         remote_src: true
-      loop:
-        - analytics-4.12-SNAPSHOT.zip
-        - archive-4.12-SNAPSHOT.zip
-        - compute-4.12-SNAPSHOT.zip
-        - correlation-4.12-SNAPSHOT.zip
-        - message-4.12-SNAPSHOT.zip
-        - wtowf-4.12-SNAPSHOT.zip
+      with_items:
+        - "{{ software_dir }}"
     
-    - name: Extracting the analytics.zip file
+    - name: Extracting all the zip file
       unarchive:
         src: /home/macko/app/{{ item }}
         dest: /home/macko/app
         remote_src: true
-      loop:
-        - analytics-4.12-SNAPSHOT.zip
-        - archive-4.12-SNAPSHOT.zip
-        - compute-4.12-SNAPSHOT.zip
-        - correlation-4.12-SNAPSHOT.zip
-        - message-4.12-SNAPSHOT.zip
-        - wtowf-4.12-SNAPSHOT.zip
+      with_items:
+        - "{{ software_dir }}"
 
-    - name: Remove the zip files from the folders
+    - name: Remove all the zip files from the folders
       file:
         path: /home/macko/app/{{ item }}
         state: absent
       with_items:
-        - analytics-4.12-SNAPSHOT.zip
-        - archive-4.12-SNAPSHOT.zip
-        - compute-4.12-SNAPSHOT.zip
-        - correlation-4.12-SNAPSHOT.zip
-        - message-4.12-SNAPSHOT.zip
-        - wtowf-4.12-SNAPSHOT.zip
+        - "{{ software_dir }}"
+
 
