@@ -36,7 +36,7 @@
       command: >
         {{ download_dir }}/solr-{{ solr_version }}/bin/install_solr_service.sh
         {{ download_dir }}/solr-{{ solr_version }}.tgz
-        -i /opt
+        -i /home/macko/app/
         -d /var/solr
         -u solr
         -s solr
