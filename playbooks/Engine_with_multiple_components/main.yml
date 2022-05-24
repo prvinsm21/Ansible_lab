@@ -1,0 +1,64 @@
+---
+- name: Installation of Analytics component on Engine server
+  hosts: uat1
+  become: true
+
+  vars_files:
+    - vars.yml
+
+  pre_tasks:
+    - name: Update apt cache if needed.
+      apt:  
+        update_cache: true
+        cache_valid_time: 3600
+  
+  handlers:
+    - name: Restart Analtyics services
+      service:
+        name: analytics
+        state: restarted
+  
+  tasks:
+    - name: Install Java
+      apt: 
+        name: openjdk-8-jdk
+        state: present
+    
+    - name: Copy the analytics.zip file
+      copy:
+        src: /tmp/{{ item }}
+        dest: /home/macko/app
+        remote_src: true
+      loop:
+        - analytics-4.12-SNAPSHOT.zip
+        - archive-4.12-SNAPSHOT.zip
+        - compute-4.12-SNAPSHOT.zip
+        - correlation-4.12-SNAPSHOT.zip
+        - message-4.12-SNAPSHOT.zip
+        - wtowf-4.12-SNAPSHOT.zip
+    
+    - name: Extracting the analytics.zip file
+      unarchive:
+        src: /home/macko/app/{{ item }}
+        dest: /home/macko/app
+        remote_src: true
+      loop:
+        - analytics-4.12-SNAPSHOT.zip
+        - archive-4.12-SNAPSHOT.zip
+        - compute-4.12-SNAPSHOT.zip
+        - correlation-4.12-SNAPSHOT.zip
+        - message-4.12-SNAPSHOT.zip
+        - wtowf-4.12-SNAPSHOT.zip
+
+    - name: Remove the zip files from the folders
+      file:
+        path: /home/macko/app/{{ item }}
+        state: absent
+      with_items:
+        - analytics-4.12-SNAPSHOT.zip
+        - archive-4.12-SNAPSHOT.zip
+        - compute-4.12-SNAPSHOT.zip
+        - correlation-4.12-SNAPSHOT.zip
+        - message-4.12-SNAPSHOT.zip
+        - wtowf-4.12-SNAPSHOT.zip
+

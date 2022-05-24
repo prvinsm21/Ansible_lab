@@ -1,0 +1,4 @@
+---
+download_dir: /tmp/New
+analytics_dir: /app/analytics
+analytics_version: 4.12
